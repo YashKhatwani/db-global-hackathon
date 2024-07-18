@@ -333,7 +333,10 @@ Examples:
     * [gcloud](https://cloud.google.com/appengine/docs/legacy/standard/python/user-managed-service-accounts#gcloud)
     * [Terraform - Flex](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/app_engine_flexible_app_version#service_account)
     * [Terraform - Standard](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/app_engine_standard_app_version#service_account)
-* [Cloud Build](https://cloud.google.com/build/docs/securing-builds/configure-user-specified-service-accounts)
+* Cloud Build
+    * [gcloud](https://cloud.google.com/build/docs/securing-builds/configure-user-specified-service-accounts)
+      * Ensure you specify the [--service-account=workload@hack-team-caretechers.iam.gserviceaccount.com](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--service-account) parameter of `gcloud builds submit`
+      * And additional specify the [--config=...](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--config) parameter where you set the logging option [CLOUD_LOGGING_ONLY](https://cloud.google.com/build/docs/securing-builds/store-manage-build-logs#store-logs).
     * [Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger#service_account_email)
 * Cloud Composer
     * [Console](https://cloud.google.com/composer/docs/how-to/managing/creating#console)
@@ -704,3 +707,6 @@ and a [Terraform example here](./terraform/example_app_engine.tf).
 You can find a [GitHub Actions example here](./.github/workflows/example_deploy_cloud_function_action.yml),
 a [gcloud example here](./.github/workflows/example_deploy_cloud_function_gcloud.yml)
 and a [Terraform example here](./terraform/example_cloud_functions.tf).
+
+### How do I build an image with Cloud Build?
+See the section ["Use a custom user-managed SA"](#use-a-customuser-managed-service-account-wherever-possible) above.
