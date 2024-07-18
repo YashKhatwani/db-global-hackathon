@@ -291,7 +291,7 @@ Examples:
     * [gcloud](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#gcloud-command)
     * [Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dataproc_cluster#service_account)
 * Notebooks
-    * [Console](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new#console) - see step 8
+    * [Console](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/create-new#console) - see step 9
     * [gcloud](https://cloud.google.com/sdk/gcloud/reference/notebooks/instances/create#--service-account)
     * [Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/notebooks_instance#service_account)
 * [Workflows](https://cloud.google.com/workflows/docs/authentication#deploy_a_workflow_with_a_custom_service_account)
