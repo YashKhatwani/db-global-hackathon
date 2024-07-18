@@ -6,12 +6,41 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+    
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    <df-messenger
+    project-id="hack-team-caretechers"
+    agent-id="88502060-fac2-4287-ac5a-4915a2b6f7c2"
+    language-code="en"
+    max-query-length="-1">
+    <df-messenger-chat-bubble
+    chat-title="Pocket Nurse">
+    </df-messenger-chat-bubble>
+    </df-messenger>
+    
+    <style>
+    df-messenger {
+        z-index: 999;
+        position: absolute;
+        top:81%;
+        --df-messenger-font-color: #000;
+        --df-messenger-font-family: Roboto;
+        /* --df-messenger-chat-background: #f3f6fc; */
+        --df-messenger-chat-background:url(images/chat_bot_background.png);
+        --df-messenger-message-user-background: #ccf1ad;
+        --df-messenger-message-bot-background: #fff;
+        bottom: 16px;
+        right: 16px;
+    }
+    </style>
+
     <!-- Roll-Dice -->
     <style>
         .floating-btn {
             width: 80px;
             height: 80px;
-            background-color: white;
+            background-color: rgb(219, 216, 216);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -19,14 +48,14 @@
             border-radius: 10%;
             font-size: 25.5px;
             font-weight: bold;
-            color: lightblue;
+            color: rgb(48, 164, 202);
             box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
             position: fixed;
             right: 20px;
-            bottom: 20px;
+            bottom: 70px;
             transition: background 0.25s;
             outline: lightskyblue;
-            border: none;
+            border: dotted;
             cursor: pointer;
         }
         .floating-btn:active {
