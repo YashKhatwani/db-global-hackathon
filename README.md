@@ -1,9 +1,14 @@
 # Welcome, caretechers, to the 2024 TDI Global Hackathon
 
+> [!IMPORTANT]
+> This README may be changed or overwritten by the hackathon organisers during the event.
+> If you intend to create documentation, please house it in a separate file.
+
+
 ## Contents
 
 1. [About your hackathon environment](#about-your-hackathon-environment)
-2. [Hackathon ID](#hackathon-id)
+2. [Initial Login](#initial-login)
 3. [Access Issues](#access-issues)
 4. [GCP](#gcp)
     1. [First log-in](#first-log-in)
@@ -44,20 +49,84 @@ Your hackathon environment consists of four components:
 You have considerable interactive access to your GCP project.
 Using the GitHub repository and the Terraform Cloud workspace are entirely optional.
 
-> **Note**
-> This README content may be changed or overwritten by the hackathon organisers during the event. If you intend to
-> create documentation please house it in a separate file.
+## Initial Login
 
-## Hackathon ID
-To derive your hackathon user ID, take the personal email address you signed up with, substitute the "@" with "." and append "@db-hackathon.com". 
+> [!CAUTION]
+> Do not attempt logins, follow links, or otherwise conduct hackathon activity from a DB device.
+> The whole event is designed to run off DB's corporate infrastructure.
+> The instructions below are available in Confluence inside theDB network.
+> It is entirely possible to follow these instructions from a mobile device running iOS or Android.
 
-E.g. foo.bar@gmail.com becomes foo.bar.gmail.com@db-hackathon.com
+### Register in the registration portal
+Ensure your personal email, team, location and optionally GitHub handle are correctly entered in the user registration 
+portal (accessible from within the DB network only).
+You can update your own details. 
+This is the golden source for the configuration of the hackathon environment. 
+All registered users will get access to Azure, GCP,HCP Terraform and OpenShift, but only those that have listed a valid 
+GitHub handle will gain access to GitHub.
 
-## Access Issues
+### Your SSO ID
+Most of this year's tooling is connected to a central Identity Provider (IdP), Entra ID (formerly Azure Active 
+Directory). 
+Your ID in the IdP is not the personal email address that you signed up with, but rather a transformation of it. 
+To determine your ID, take the personal email you signed up with, replace the "@" with a "." and add the suffix 
+"@dbhackathon.com". 
+For example, foo@bar.com becomes foo.bar.com@db-hackathon.com. 
+This is the email/ID you should use when prompted for SSO login via Microsoft Entra ID.
+ 
+### Azure Portal
+Please log in using https://aka.ms/azureportal.
+Use the SSO ID described above.
+Use the initial password given in your briefing. 
+Your team  lead can remind you of it. 
+You will be prompted to change it on first login and additionally set up alternate authentication methods. 
+Please do so immediately.
 
-If you have any issues accessing any aspect of the hackathon environment, please raise an
-issue [here](https://github.com/db-hackathon/support/issues/new/choose),
-or ask a colleague to do so.
+### GCP Console
+Please log in using https://www.google.com/a/db-hackathon.com/ServiceLogin?continue=https://console.cloud.google.com. 
+Use the credentials you configured above. 
+When logged in, you should be able to see a project named after your team and a project named "hackathon-seed-2021" 
+which contains a storage bucket with shared materials for your consideration.
+
+### HCP Terraform
+Please log in using https://app.terraform.io/sso/sign-in. 
+You do not need to wait for an invitation email to attempt this. 
+Use the organisation name "db-hackathon-2024". 
+When prompted, use the credentials you configured above. 
+If you do not already have a HCP Terraform account associated with the email address you used to register for this 
+event, you will be prompted to create one and link it to the above SSO ID. 
+Alternatively, if you do already have aGCP Terraform account, follow the option to "Link to existing HCP Terraform 
+account". 
+When you log in, you should be able to see a workspace named after your team.
+
+### GitHub
+Only participants who registered with a GitHub handle will be invited to the organisation. 
+These participants will receive an email at their registered personal email address with a convenient direct link to 
+accept the invitation. 
+When prompted, sign-in using the GitHub handle you registered with. 
+When prompted for SSO authentication, use the ID configured above. 
+Once logged in, you will need to accept the invitation to the organisation "db-hackathon". 
+
+> [!NOTE]
+> Some users report that they need to re-open the link from the email after the first GitHub and SSO log-in in order to 
+> see the invitation. 
+
+In that organisation you will have a repository named after your team. You may not see the repository when you first log-in. Try again after one hour.
+
+### Microsoft Teams
+Use your SSO ID to log in. You can access teams via a browser (https://teams.microsoft.com/v2/) or the 
+[desktop app](https://www.microsoft.com/en-gb/microsoft-teams/download-app). 
+
+> [!NOTE]
+> Early feedback is that the desktop app is notably better for video calls and screen sharing, but all other facilities 
+> are equal.
+
+### Getting Help
+If you have difficulty with any of these steps:
+* Prior to the event, you can seek help inside the DB network on a best-efforts basis in the DB Teams channel advertised in your briefing.
+* During the event: 
+  * Preferably please raise an issue in the [Support repo](https://github.com/db-hackathon/support/issues/new/choose), or ask a colleague to do so on your behalf.
+  * Alternatively, raise it in the event [MS Teams tenant's support channel](https://teams.microsoft.com/l/team/19%3AanjLDL718QMHaZCH0sDgW6dz-Cl8Kcgb8EJvNVVqvo41%40thread.tacv2/conversations?groupId=7c337606-8e36-414f-946e-09ac1161aca5&tenantId=a8f249fb-91ee-4dd5-bf60-d1ec1330b078), or ask a colleague to do so on your behalf.
 
 ## [GCP](https://console.cloud.google.com/home/dashboard?project=hack-team-caretechers)
 
@@ -501,8 +570,8 @@ When it detects an expired token, simply access the Kubernetes secret again to g
 ## Azure
 
 Log in using your SSO ID. Each team has a Resource Group in which they have broad administrative access.
-Training materials are
-available [here](https://dbaihackathon2024outlook.sharepoint.com/sites/HakathonTraining/SitePages/TrainingHome.aspx).
+Training materials are available [here](https://dbaihackathon2024outlook.sharepoint.com/sites/HakathonTraining/SitePages/TrainingHome.aspx).
+A user guide is available [here](https://storage.cloud.google.com/hackathon_shared_storage/Hackathon2024AzureUserGuide.docx).
 
 ## [MS Teams](https://teams.microsoft.com/v2/)
 
