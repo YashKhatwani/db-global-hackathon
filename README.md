@@ -617,7 +617,8 @@ your Workload SA.
 
 ### How do I deploy Cloud Run?
 
-You can find a [GitHub Actions example here](./.github/workflows/example_deploy_cloud_run_action.yml)
+You can find a [GitHub Actions example here](./.github/workflows/example_deploy_cloud_run_action.yml), 
+a [gcloud example here](./.github/workflows/example_deploy_cloud_run_gcloud.yml),
 and a [Terraform example here](./terraform/example_cloud_run.tf).
 
 ### How do I deploy App Engine?
