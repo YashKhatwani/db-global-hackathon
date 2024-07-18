@@ -89,6 +89,10 @@ The below APIs have been activated on your project. You cannot activate APIs you
 * documentai.googleapis.com
 * eventarc.googleapis.com
 * eventarcpublishing.googleapis.com
+* fcm.googleapis.com
+* firebase.googleapis.com
+* firebaseinstallations.googleapis.com
+* firestore.googleapis.com
 * language.googleapis.com
 * logging.googleapis.com
 * monitoring.googleapis.com
@@ -147,12 +151,14 @@ Every team member has the following roles granted at project level:
 * roles/contactcenterinsights.editor
 * roles/dataflow.developer
 * roles/dataproc.editor
+* roles/datastore.owner
 * roles/datastudio.viewer
 * roles/dialogflow.admin
 * roles/discoveryengine.admin
 * roles/documentai.editor
 * roles/errorreporting.admin
 * roles/eventarc.developer
+* roles/firebase.admin
 * roles/iam.roleViewer
 * roles/logging.admin
 * roles/monitoring.editor
@@ -209,6 +215,7 @@ The workload SA has the following roles granted at project level:
 * roles/dataflow.worker
 * roles/dataproc.hubAgent
 * roles/dataproc.worker
+* roles/datastore.user
 * roles/datastudio.editor
 * roles/dialogflow.client
 * roles/dialogflow.reader
