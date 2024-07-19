@@ -411,7 +411,7 @@ $'{
 
 ### Limitations & Restrictions
 
-* You have a budget of EUR ~150.
+* You have a budget of EUR ~100.
   Your team lead will receive notifications when your actual or forecast spend passes 25%, 50%, 75%, 90% and 100%. If
   you are the team lead please cascade this information to your fellow team members.
   Your project will be torn down if you approach 100% or if you are spending rapidly.
@@ -710,3 +710,10 @@ and a [Terraform example here](./terraform/example_cloud_functions.tf).
 
 ### How do I build an image with Cloud Build?
 See the section ["Use a custom user-managed SA"](#use-a-customuser-managed-service-account-wherever-possible) above.
+You'll likely end up with something like:
+```bash
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.\
+  dev/$GCP_PROJECT/my_repo/my_service" \
+  --service-account="projects/$GCP_PROJECT/serviceAccounts/$WORKLOAD_SA_EMAIL" \
+  --default-buckets-behavior=regional-user-owned-bucket
+```
