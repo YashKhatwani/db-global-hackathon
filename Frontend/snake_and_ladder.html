@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+    
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    <df-messenger
+    project-id="hack-team-caretechers"
+    agent-id="88502060-fac2-4287-ac5a-4915a2b6f7c2"
+    language-code="en"
+    max-query-length="-1">
+    <df-messenger-chat-bubble
+    chat-title="Pocket Nurse">
+    </df-messenger-chat-bubble>
+    </df-messenger>
+    
+    <style>
+    df-messenger {
+        z-index: 999;
+        position: absolute;
+        top:90%;
+        left:20%;
+        --df-messenger-font-color: #000;
+        --df-messenger-font-family: Roboto;
+        /* --df-messenger-chat-background: #f3f6fc; */
+        --df-messenger-chat-background:url(images/chat_bot_background.png);
+        --df-messenger-message-user-background: #ccf1ad;
+        --df-messenger-message-bot-background: #fff;
+        bottom: 16px;
+        right: 16px;
+    }
+    </style>
+
+    <!-- Roll-Dice -->
+    <style>
+        .floating-btn {
+            width: 80px;
+            height: 80px;
+            background-color: rgb(219, 216, 216);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 10%;
+            font-size: 25.5px;
+            font-weight: bold;
+            color: rgb(48, 164, 202);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+            position: fixed;
+            right: 20px;
+            bottom: 10px;
+            transition: background 0.25s;
+            outline: lightskyblue;
+            border: dotted;
+            cursor: pointer;
+        }
+        .floating-btn:active {
+            background:springgreen;
+        }
+
+        .floating-btn img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Popup and behind screen -->
+    <style>
+        .bg-modal{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+        .modal-content{
+            width: 60%;
+            height: 90%;
+            background-color: rgb(176, 252, 252);
+            border-radius: 4px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .dementia_content{
+            position: absolute;
+            overflow: auto;
+            top: 2%;
+            left: 38%;
+            margin-top: 2%;
+            padding: 2%;
+            width: 50%;
+            height: 25%;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            text-align: justify;
+            border: dotted black;
+            border-radius: 1px 20px;
+            box-shadow: 5px 5px 10px rgb(146, 139, 139);
+            background-color: #c6007e;
+            line-height: 140%;
+        }
+        .dementia_content_question{
+            position: absolute;
+            color: #c6007e;
+            font-weight: bold;
+            left: 15%;
+            top : 45%;
+            padding: 2%;
+            margin-top: 3%;
+            width: 70%;
+            border: dotted black;
+            border-radius: 20px;
+            background: white;
+            overflow: auto;
+            box-shadow: 10px 10px 15px rgb(145, 145, 145);
+        }
+        .dementia_content_qna{
+            position: absolute;
+            color: black;
+            font-weight: bold;
+            left: 15%;
+            top : 65%;
+            width: 72%;
+            height: 24%;
+            padding: 10px;
+            text-align: justify;
+            border: dotted #c6007e;
+            border-radius: 20px;
+            background-color: white;
+            box-shadow: 10px 10px 15px rgb(135, 135, 135);
+            padding-top: 2%;
+        }
+        .dementia_content_qna #answer_output{
+            position: absolute;
+            margin-top: 5%;
+            margin-left: 15%;
+            color: black;
+            border: dotted #c6007e;
+            border-radius: 50px;
+            width: 60%;
+            text-align: center;
+        }
+        .dementia_content_individual_page_intro{
+            color: #c6007e;
+            font-weight: bold;
+            font-size: 1.8em;
+        }
+        .dementia_content_individual_page{
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            position: absolute;
+            top: 17%;
+            left: 64%;
+            width: 30%;
+            height: 54%;
+            border: solid white;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(63, 62, 62);
+            line-height: 200%;
+            text-align: center;
+            align-items: center;
+            background-color: #c6007e;
+            transition: transform .9s;
+        }
+        .dementia_content_individual_page:hover{
+            opacity: 0.95;
+            transform: scale(1.1);
+        }
+        .dementia_img_individual_page{
+            position: absolute;
+            display:block;
+            width:60%;
+            height:60%;
+            top: 20%;
+            box-shadow: 5px 5px 10px;
+        }
+        #popup_input1{
+            width: 50%;
+            display: block;
+            margin: 15px auto;
+        }
+        #popup_input2{
+            width: 50%;
+            display: block;
+            margin: 15px auto;
+        }
+        .close{
+            position: absolute;
+            top: 0;
+            right: 14px;
+            font-size: 42px;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- Board -->
+    <style>
+        #snake_ladder_container{
+            width: 90%;
+            margin-left: 5%;
+            display: grid;
+            grid-template-columns: repeat(10,10%);
+            font-size: 2.5px;
+            box-shadow: 0px 0px 50px 15px rgb(142, 142, 142);
+            border: solid;
+
+        }
+        #snake_ladder_container div{
+            outline: 1px solid black;
+            height: 9vh;
+            font-size: 7em;
+        }
+        .snake{
+            background-size: 110%;
+            position: relative;
+        }
+        .snake span{
+            font-size: .8em;
+            font-weight: bold;
+            color: brown;
+            position: absolute;
+            top: 75%;
+            left: 65%;
+
+        }
+        .ladder{
+            background-size: 80%;
+            position: relative;
+        }
+  
+        .ladder span{
+            font-size: .8em;
+            font-weight: bold;
+            color: brown;
+            position: absolute;
+            top: 70%;
+            left: 65%;
+        }
+
+        .snake_ladder_cell{
+            border-radius: 5%;
+            color: white;
+            font-weight: bold;
+            transition: transform .5s;
+            cursor: pointer;
+            border: dotted brown;
+            overflow: clip;
+            position: relative;
+        }
+        .snake_ladder_cell:hover{
+            opacity: 0.85;
+            transform: scale(1.1);
+        }
+        .snake_ladder_cell img{
+            position: absolute;
+            top: 5%;
+            left: 25%;
+            width: 45%;
+            height: 85%;
+        }
+
+        /* Google API Button */
+        .edit_translate_btn select.goog-te-combo{
+            background-color:#f6edfd;
+            border: purple;
+            color:#383ffa;
+            border: solid black;
+            border-radius:3px;
+            padding:6px 8px;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-left: 5%;
+            margin-top: 2%;
+        }
+        .goog-logo-link{
+            display:none !important;
+        }
+        .goog-te-gadget{
+            color:transparent!important;
+        }
+        a.VIpgJd-ZVi9od-l4eHX-hSRGPd{
+            display:none !important;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <!-- Board -->
+    <div id="snake_ladder_container"></div>
+    <!-- Dice -->
+    <button id="dice_button" onclick="rollDice()" class="floating-btn">Roll</button>
+    <!-- Popup and background screen -->
+    <div class="bg-modal">
+        <div id="modal_content_id" class="modal-content">
+            <div class="close">+</div>
+        </div>
+    </div>
+    <!-- Translate Button -->
+    <div class="edit_translate_btn" id="google_translate_element"></div>
+
+
+    <script>
+        
+        // starting postion
+        var currentPosition=1;
+
+        // Dataset
+        let actual_info_set = {
+            1: {
+            "info": "Dementia : Doctors typically use the word ‘‘dementia’’ to describe common symptoms – such as memory loss, confusion, and problems with speech and understanding – that get worse over time",
+            "question": "Josh's Grandpa is forgeting things in recent times , help Josh !!!",
+            "option1": "Josh must convey this to parent's as this may be possible cause of dementia",
+            "option2": "Josh must ignore it , as it may happen with anyone",
+            "answer": "Josh must convey this to parent's as this may be possible cause of dementia"
+            },
+            2: {
+            "info": "Prevention : Checking things like your blood pressure, blood sugar, cholesterol levels, weight , if these are properly treated or managed, the risk of dementia may be reduced",
+            "question": "Jake's Grandma's blood pressure, blood sugar, cholesterol levels are high , help Jake !!!",
+            "option1": "Jake can only consider it as age issue and take for regular checkup",
+            "option2": "Jake must also take a second opinion from dementia specialist",
+            "answer": "Jake must also take a second opinion from dementia specialist"
+            },
+            3: {
+            "info": "Early-Stage : In the early stages of most forms of dementia – including Alzheimer’s disease – the person may have mild problems with their concentration and memory , may have difficulties with decision-making",
+            "question": "Blake's uncle is seeming dull and having lack of concentration , help Blake !!!",
+            "option1": "Blake must ignore it , as it may be that uncle is over-working",
+            "option2": "Blake must talk with his uncle and if required escalte matter to a sepcialist",
+            "answer": "Blake must talk with his uncle and if required escalte matter to a sepcialist"
+            },
+            4: {
+            "info": "Middle-Stage : In the middle stage of all forms of dementia it is likely that the person will exhibit some behaviour changes , may experience changes in perception, delusions or hallucinations",
+            "question": "Jane's uncle refred that he ate mango , when it was not made available to him  , help Jane !!!",
+            "option1": "Jane can have a talk with uncle and if any symtpoms are observed notify GP",
+            "option2": "Jane can ignore it as it may be slip of tongue",
+            "answer": "Jane can have a talk with uncle and if any symtpoms are observed notify GP"
+            },
+            5: {
+            "info": "Last-Stage : The ability to communicate is significantly reduced in late stage dementia. The person may only be able to speak a few words and have difficulty understanding what people say to them",
+            "question": "Greg's noticed that grandpa in near-by store stays isolated and talks lesser , help Greg !!!",
+            "option1": "Greg must convey this to nearby GPs or Public Dementia Volunteers",
+            "option2": "Greg must not worry much about it",
+            "answer": "Greg must convey this to nearby GPs or Public Dementia Volunteers"
+            },
+            6: {
+            "info": "Diet : Helping a person with dementia to maintain a healthy diet can be difficult, but it’s important to encourage them to eat well",
+            "question": "Shrug's Grandpa is having dementia and forgets to eat on time , help Shrug !!!",
+            "option1": "Shrug must be strict with them and tell to be more attentive",
+            "option2": "Shrug must setup reminders in their mobile or call to remind them",
+            "answer": "Shrug must setup reminders in their mobile or call to remind them "
+            },
+            7: {
+            "info": "Hydration : People with dementia may not always recognise when they are thirsty or be able to express their thirst. This may mean that they do not drink enough and become dehydrated",
+            "question": "Drek's observed that his grandma didn't drink water quite often , help Drek !!!",
+            "option1": "Drek must timely check if his grandma drank water",
+            "option2": "Drek must just bother to keep a bottle of water in theri room",
+            "answer": "Drek must timely check if his grandma drank water"
+            },
+            8: {
+            "info": "Health : A person with dementia should be supported to be physically active. Exercise has physical health benefits, can boost mood and often provides vital social contact",
+            "question": "Drun's Grandpa is becoming isolated and prefers to stay home , help Drun !!!",
+            "option1": "Drun can hand grandpa TV remote , that's it",
+            "option2": "Drun can talk with grandpa , ask to go for a walk outside",
+            "answer": "Drun can talk with grandpa , ask to go for a walk outside"
+            },
+            9: {
+            "info": "Relation : One may find that ones caring role overtakes ones relationship with them as a family member. But while your relationship will change, it can still bring you both enjoyment",
+            "question": "Yer's takes care of his grandpa but his grandpa is still feeling isolated , help Yer !!!",
+            "option1": "Yer is taking care that's it and shouldn't bother much",
+            "option2": "Yer should take a step forward and try to be his grandap's friend",
+            "answer": "Yer should take a step forward and try to be his grandap's friend"
+            },
+            10: {
+            "info": "Dementia UK : The free, confidential Dementia Helpline is staffed by our dementia specialist Admiral Nurses who provide information, advice, and support with any aspect of dementia",
+            "question": "Drele's needs to convey his concern about garndap's forgetfullness and care he takes , help Drele !!!",
+            "option1": "Drele must only convey it to his parent's",
+            "option2": "Drele must convey to his parents and ask them if they can reach out dementia UK",
+            "answer": "Drele must convey this to parent's as this may be possible cause of dementia"
+            }
+        };
+
+        let info_set = {}
+        for(i=2;i<100;i++)
+        {
+            fetch_index = i%10!=0 ? i%10 : 10;
+            info_set[i]=actual_info_set[fetch_index];
+        }
+
+
+        // first and last page content added explicitly
+        info_set["first_page"] = {
+            "info": "Guide : <br><br> Click on roll dice <br> Coin moves places <br> Each position prompts QnA <br> Happy Learning !!! "
+            }
+        info_set["last_page"] = {
+            "info": "Congratulations : <br><br> Game is completed <br> The game will restart <br> You may close the tab <br> Happy Learning !!! "
+            }
+
+
+        // Snake and Ladder details
+        var boxDetails = {
+            3: {
+                type:"ladder",
+                "action":16
+            },
+            14: {
+                type:"snake",
+                "action":9
+            },
+            29: {
+                type:"ladder",
+                "action":47
+            },
+            36: {
+                type:"snake",
+                "action":7
+            },
+            57: {
+                type:"ladder",
+                "action":78
+            },
+            74: {
+                type:"snake",
+                "action":53
+            },
+            97: {
+                type:"snake",
+                "action":49
+            },
+            61: {
+                type:"ladder",
+                "action":96
+            }
+        };
+
+
+        // Board Numbers Fill
+        let snake_ladder_container = document.getElementById("snake_ladder_container");
+
+        let first_row_num_list = [100,81,80,61,60,41,40,21,20,1]
+        let list_colors = {
+                0: "#F25353",
+                1: "#F2C553",
+                2: "#EDF253",
+                3: "#BAF253",
+                4: "#5EF253",
+                5: "#53F2C0",
+                6: "#53CAF2",
+                7: "#A553F2",
+                8: "#DC53F2",
+                9: "#01DF13"                
+            }
+        
+        function createCell(i,index_count){
+            let tmp = document.createElement('div');
+            tmp.innerHTML = i;
+            tmp.id = "id_"+i
+            
+            if(boxDetails.hasOwnProperty(i)){
+                let obj =  boxDetails[i];
+
+                let span = document.createElement('span');
+                span.innerHTML = "Go "+obj.action;
+                tmp.append(span);
+
+                tmp.style= `background-image: url(images/${obj.type}.png);color: red;`
+                tmp.classList.add(obj.type);
+            }
+            else{
+                tmp.style= `background: ${list_colors[index_count]};`
+            }
+            tmp.classList.add("snake_ladder_cell");
+            snake_ladder_container.append(tmp);
+        }
+        
+        first_row_num_list.forEach( (num)=>{
+            
+            if(num%2==0){
+                count=num;
+                for(i=num;i>=(num-9);i--){
+                    createCell(i,count-i);
+                }
+            }
+            else{
+                count=num+9;
+                for(i=num;i<=(num+9);i++){
+                    createCell(i,count-i);
+                }
+            }
+
+        }
+        );
+
+        // Roll dice logic
+        function rollDice(){
+            let pos = Math.floor( (Math.random()*6)+1 );
+
+            let newPosition = currentPosition+pos;
+
+            let img = document.createElement('img');
+            img.id = "dice_id_"+pos;
+            img.src="images/dice_"+pos+".png";
+            
+            let dice_button = document.getElementById("dice_button");
+            if (currentPosition!=1){
+                dice_button.lastElementChild.remove();
+            }
+            else{
+                dice_button.innerHTML=""
+            }
+            dice_button.append(img);
+
+            setTimeout(()=>{movePlayer(newPosition);setTimeout(()=>{display_popup(newPosition)},1000);},1000);
+        }
+
+
+        // Coin Movement Logic
+        function movePlayer(newPosition){
+            if(newPosition>=100){
+                display_popup(newPosition);
+                return;
+            }
+        
+            if(newPosition>1){
+                document.getElementById("id_"+currentPosition).lastElementChild.remove();
+            }
+
+            let img = document.createElement("img");
+            img.id = "player_id_"+newPosition;
+            img.src="images/player_piece.png"
+            document.getElementById("id_"+newPosition).append(img);
+
+            currentPosition = newPosition;
+
+            if(boxDetails.hasOwnProperty(newPosition)){
+                setTimeout( ()=>{
+                    movePlayer(boxDetails[newPosition].action)
+                } , 3000
+                )
+            }
+        }
+        
+
+        // Popup Display Logic
+        function display_popup(newPosition){
+                document.querySelector('.bg-modal').style.display = 'flex';
+                popup_box = document.getElementById("modal_content_id");
+
+                if(newPosition>=100){
+                    popup_box.innerHTML='';
+
+                    let div_close_btn = document.createElement("div");
+                    div_close_btn.classList.add("close");
+                    div_close_btn.innerHTML='+';
+                    popup_box.append(div_close_btn);
+
+                    let div_last_page_intro = document.createElement("div");
+                    div_last_page_intro.classList.add('dementia_content_individual_page_intro');
+                    div_last_page_intro.innerHTML="!!! Dementia Successfully Demistified !!!";
+                    popup_box.append(div_last_page_intro);
+
+                    let img_last_page = document.createElement("img");
+                    img_last_page.id = "dementia_img_last_page";
+                    img_last_page.classList.add('dementia_img_individual_page');
+                    img_last_page.src="images/dementia_img_last_page.png";
+                    // img_first_page.style="display:block;width:30%;height:40%;"
+                    popup_box.append(img_last_page);
+
+                    let div_last_page = document.createElement("div");
+                    div_last_page.classList.add('dementia_content','dementia_content_individual_page');
+                    div_last_page.innerHTML=info_set["last_page"]["info"];
+                    popup_box.append(div_last_page);
+
+                    document.querySelector('.close').addEventListener('click',
+                        function(){
+                            document.querySelector('.bg-modal').style.display = 'none';
+                            currentPosition=1;
+                            setTimeout(()=>{display_popup(currentPosition);},1000);
+                        }); 
+                    return;
+                }
+                else if(newPosition!=1){
+                    popup_box.innerHTML='';
+
+                    let div_close_btn = document.createElement("div");
+                    div_close_btn.classList.add("close");
+                    div_close_btn.innerHTML='+';
+                    popup_box.append(div_close_btn);
+
+                }
+                else if(newPosition==1){
+                    popup_box.innerHTML='';
+
+                    let div_close_btn = document.createElement("div");
+                    div_close_btn.classList.add("close");
+                    div_close_btn.innerHTML='+';
+                    popup_box.append(div_close_btn);
+
+                    let div_first_page_intro = document.createElement("div");
+                    div_first_page_intro.classList.add('dementia_content_individual_page_intro');
+                    div_first_page_intro.innerHTML="Demistify Dementia With Play";
+                    popup_box.append(div_first_page_intro);
+
+                    let img_first_page = document.createElement("img");
+                    img_first_page.id = "dementia_img_first_page";
+                    img_first_page.classList.add('dementia_img_individual_page');
+                    img_first_page.src="images/dementia_img_first_page.png";
+                    popup_box.append(img_first_page);
+
+                    let div_first_page = document.createElement("div");
+                    div_first_page.classList.add('dementia_content','dementia_content_individual_page');
+                    div_first_page.innerHTML=info_set["first_page"]["info"];
+                    popup_box.append(div_first_page);
+
+                    document.querySelector('.close').addEventListener('click',
+                        function(){
+                            document.querySelector('.bg-modal').style.display = 'none';
+                        }); 
+                    return;
+                }
+                
+                
+                let img = document.createElement("img");
+                img.id = "dementia_img_"+newPosition;
+                fetch_index = newPosition%10!=0 ? newPosition%10 : 10;
+                img.src="images/dementia_img_"+fetch_index+".png";
+                img.style="display:block;width:30%;height:40%;"
+                popup_box.append(img);
+
+                let div = document.createElement("div");
+                div.classList.add('dementia_content');
+                div.innerHTML=info_set[newPosition]["info"];
+                popup_box.append(div);
+
+                let span = document.createElement("span");
+                span.innerHTML=info_set[newPosition]["question"];
+                span.classList.add('dementia_content_question');
+                popup_box.append(span);
+
+                let div1 = document.createElement("div");
+                div1.classList.add('dementia_content_qna');
+                popup_box.append(div1);
+
+                let input1 = document.createElement("input");
+                input1.id = "question_input1";
+                input1.name = "question_input";
+                input1.setAttribute("value","option1");
+                input1.type = "radio";
+                div1.append(input1);
+
+                let label1 = document.createElement("label");
+                label1.id="label1";
+                label1.htmlFor = input1.id;
+                label1.innerHTML = info_set[newPosition]["option1"];
+                div1.append(label1);
+
+                let br = document.createElement("br");
+                div1.append(br);
+
+                let br_copy1 = document.createElement("br");
+                div1.append(br_copy1);
+
+
+                let input2 = document.createElement("input");
+                input2.id = "question_input2";
+                input2.name = "question_input";
+                input2.setAttribute("value","option2");
+                input2.type = "radio";
+                div1.append(input2);
+                
+                let label2 = document.createElement("label");
+                label2.htmlFor = input2.id;
+                label2.id="label2";
+                label2.innerHTML = info_set[newPosition]["option2"];
+                div1.append(label2);
+
+                let br1 = document.createElement("br");
+                div1.append(br1);
+
+                let span1 = document.createElement('span');
+                span1.id = "answer_output"
+                span1.innerHTML="Please select a choice !!!"
+                div1.append(span1);
+
+                document.querySelector('#question_input1').addEventListener('click',
+                function(){
+                    qna_verifer();
+                }); 
+
+                document.querySelector('#question_input2').addEventListener('click',
+                    function(){
+                        qna_verifer();
+                    }); 
+
+            }
+
+
+        // Initial Coin Movement
+        movePlayer(currentPosition);
+        display_popup(currentPosition);
+
+
+        // Verifies QnA
+        function qna_verifer(){
+            console.log(currentPosition);
+            if (document.getElementById('question_input1').checked) {
+                    if(document.getElementById('label1').innerHTML==info_set[currentPosition]["answer"]){
+                        document.getElementById('answer_output').innerHTML="Well Done ,correct !!!";
+                    }
+                    else{
+                        document.getElementById('answer_output').innerHTML="Better, Next Time !!!";
+                    }
+                    document.querySelector('.close').addEventListener('click',
+                        function(){
+                            document.querySelector('.bg-modal').style.display = 'none';
+                        }); 
+                }
+            else if(document.getElementById('question_input2').checked) {
+                    if(document.getElementById('label2').innerHTML==info_set[currentPosition]["answer"]){
+                        document.getElementById('answer_output').innerHTML="Well Done ,correct !!!";
+                    }
+                    else{
+                        document.getElementById('answer_output').innerHTML="Better, Next Time !!!";
+                    }
+                    setTimeout(()=>{},2000);
+                    document.querySelector('.close').addEventListener('click',
+                    function(){
+                        document.querySelector('.bg-modal').style.display = 'none';
+                    }); 
+                }
+        }
+
+    </script>
+
+
+    <!-- Google Transalte API -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+        </script>    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,116 @@
+body {
+    background-color: #00b0b9;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#grid img {
+    width: 100px;
+}
+
+.tile {
+    background-color: #3498db;
+    border: 2px solid #2980b9;
+    border-radius: 10px;
+    /* padding: 40px; */
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+.game_contianer {
+    font-family: "Arial", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    background-color: #f0f0f0; /* Light background color for the game container */
+    border: 10px solid; /* Border width */
+    border-color: #c6007e; /* Border colors in the specified order */
+    border-radius: 15px; /* Optional: rounded corners */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px auto; /* Center the container with auto margins */
+    width: 100%; /* Adjust the width as needed */
+    max-width: 800px; /* Optional: maximum width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for better visual effect */
+}
+
+.btn {
+    background-color: #c6007e; /* Pink background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px; /* Adjust as needed for spacing */
+    transition: background-color 0.2s, transform 0.2s; /* Smooth transition for background color and transform */
+}
+
+.btn:hover {
+    background-color: #ff85c0; /* Slightly lighter pink for hover effect */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+h3 {
+    font-size: 24px;
+    color: #c6007e;
+}
+
+.modal {
+    /* display: none; */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Adjusted width */
+    text-align: center; /* Center content */
+    border-radius: 50px;
+}
+
+.modal-content img {
+    width: 100%; /* Image takes full width of modal content */
+    max-width: 50%; /* Ensure image does not exceed 50% of modal content */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
