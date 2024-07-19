@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Carousel</title>
+    <link rel="stylesheet" href="listenandlearn.css">
+</head>
+
+
+<body>
+    <div class="outer-container">
+        <div class="video-carousel" id="video-carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <iframe class="video" width="1000" height="500" src="https://www.youtube.com/embed/-6SazIzMHxQ"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        frameborder="0" allowfullscreen></iframe>
+                    <div class="mcq">
+                        <p>How did Jody help her Mom?</p>
+                        <form onsubmit="return checkAnswer(event, 'question1', 'option2')">
+                            <label><input type="radio" name="question1" value="option1">Jody just used to give her Mom
+                                medicines on time</label><br>
+                            <label><input type="radio" name="question1" value="option2"> Jody gave her Mom love ,
+                                support and care with medicines </label><br>
+                            <button class='btn' type="submit">Submit</button>
+                        </form>
+                        <p class="result" id="result-question1"></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <iframe class="video" width="1000" height="500" src="https://www.youtube.com/embed/lJdLf7gQWJs"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        frameborder="0" allowfullscreen></iframe>
+                    <div class="mcq">
+                        <p>How can young children help in dementia?</p>
+                        <form onsubmit="return checkAnswer(event, 'question2', 'option2')">
+                            <label><input type="radio" name="question2" value="option1">They can interact with patients
+                                and do some activities with them</label><br>
+                            <label><input type="radio" name="question2" value="option2">They should not talk much to
+                                patients and mind their own business </label><br>
+                            <button class='btn' type="submit">Submit</button>
+                        </form>
+                        <p class="result" id="result-question2"></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <iframe class="video" width="1000" height="500" src="https://www.youtube.com/embed/mz8PG_k28OU"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        frameborder="0" allowfullscreen></iframe>
+                    <div class="mcq">
+                        <p>What are preventive measures one can take to be healthy lifetime?</p>
+                        <form onsubmit="return checkAnswer(event, 'question3', 'option1')">
+                            <label><input type="radio" name="question3" value="option1"> Live a good lifestyle , eat
+                                healthy diet and express yourself</label><br>
+                            <label><input type="radio" name="question3" value="option2"> You are still young you can eat
+                                fast food now and then take care when symptoms show</label><br>
+                            <button class='btn' type="submit">Submit</button>
+                        </form>
+                        <p class="result" id="result-question3"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-button prev" onclick="prevVideo()">&lt;</button>
+        <button class="carousel-button next" onclick="nextVideo()">&gt;</button>
+    </div>
+    <script src="listenandlearn.js" defer></script>
+</body>
+
+</html>
